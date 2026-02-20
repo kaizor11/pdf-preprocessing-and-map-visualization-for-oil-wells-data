@@ -54,17 +54,22 @@ def main():
                     left_text = normalize(left_text)
                     right_text = normalize(right_text)
 
-                    well_name = re.search(r"Well Name and Number.*\n+(.+)", left_text)
-                    well_name = well_name.group(1) if well_name else None
-                    well_file_num = re.search(r"Well File No\.?\s*\n+(\d+)", right_text)
+                    well_name = re.search(r"Well Name and Number.*\n+(.+)", left_text, re.IGNORECASE)
+                    well_name = well_name.group(1) if well_name else ""
+                    well_file_num = re.search(r"Well File No\.?\s*\n+(\d+)", right_text, re.IGNORECASE)
                     well_file_num = well_file_num.group(1) if well_file_num else None
-                    operator = re.search(r"Operator.*\n+(.+)", left_text)
-                    operator = operator.group(1) if operator else None
+                    operator = re.search(r"Operator.*\n+(.+)", left_text, re.IGNORECASE)
+                    operator = operator.group(1) if operator else ""
+                    address = re.search(r"Address.*\n+(.+)", left_text, re.IGNORECASE)
+                    address = address.group(1) if address else ""
+                    # address2 = re.search(r"City State Zip Code.*\n+(.+)", right_text, re.IGNORECASE)
+                    # address2 = address2.group(1) if address2 else ""
 
                     print(f"\nEXTRACTED INFO ({filename})")
                     print(f"Well Name: {well_name}")
                     print(f"File Num: {well_file_num}")
                     print(f"Operator: {operator}")
+                    print(f"Address: {address}")
                     print(f"Extracted from {filename} page {i + 1}")
                     break
             
@@ -72,19 +77,20 @@ def main():
             # print("==========")
             # print(right_text)
             output.append([
-                str(filename),
+                filename,
                 well_file_num,
                 well_name,
-                operator
+                operator,
+                address
             ])
         
         # temp
-        ITER += 1
-        if ITER == 3:
-            break
-    columns=["pdf", "file_num", "well_name", "operator"]
+        # ITER += 1
+        # if ITER == 10:
+        #     break
+    columns=["pdf", "file_num", "well_name", "operator", "address"]
     output = pd.DataFrame(output, columns=columns)
     output.to_csv("output.csv", index=False)
-    print(f"Execution time: {time.time() - start:2f} seconds")
+    print(f"Execution time: {((time.time() - start)/60):2f} min ({time.time() - start:2f}s)")
 if __name__ == "__main__":
     main()
