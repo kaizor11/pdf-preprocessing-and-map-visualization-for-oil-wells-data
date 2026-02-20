@@ -1,4 +1,78 @@
-pdf,file_num,well_name,operator
-W11745.pdf,11745,Basic Game & Fish 34-3,"RIM Operating, Inc"
-W11920.pdf,,Corps of Engineers 31-10,"RIM Operating, Inc"
-W15358.pdf,15358,Lewis & Clark 2-4H,RIM Operatin
+pdf,file_num,well_name,operator,address
+W11745.pdf,11745,Basic Game & Fish 34-3,"RIM Operating, Inc",5 Inverness Drive East
+W11920.pdf,,Corps of Engineers 31-10,"RIM Operating, Inc",5 Inverness Drive East
+W15358.pdf,15358,Lewis & Clark 2-4H,RIM Operatin,5 Inverness Drive East
+W20197.pdf,15358,Lewis & Clark 2-4H,RIM Operatin,5 Inverness Drive East
+W20407.pdf,15358,Lewis & Clark 2-4H,RIM Operatin,5 Inverness Drive East
+W20863.pdf,15358,Lewis & Clark 2-4H,RIM Operatin,5 Inverness Drive East
+W20864.pdf,15358,Lewis & Clark 2-4H,RIM Operatin,5 Inverness Drive East
+W21266.pdf,,DAHL 15-11H SWSE,Oasis Petroleum North America LLC,"1001 Fannin, Suite 1500 Houston"
+W21796.pdf,,DAHL FEDERAL 2-15H NWNE,Oasis Petroleum North America LLC |,"1001 Fannin, Suite 1500 Houston"
+W22099.pdf,,DAHL FEDERAL 2-15H NWNE,Oasis Petroleum North America LLC |,"1001 Fannin, Suite 1500 Houston"
+W22220.pdf,22220,,,"1001 Fannin, Suite 1500 Houston"
+W22221.pdf,22221,INNOKO 5301 43-12T SWSE,Oasis Petroleum North America LLC (,"1001 Fannin, Suite 1500 Houston"
+W22247.pdf,22221,INNOKO 5301 43-12T SWSE,Oasis Petroleum North America LLC (,"1001 Fannin, Suite 1500 Houston"
+W22249.pdf,22221,INNOKO 5301 43-12T SWSE,Oasis Petroleum North America LLC (,"1001 Fannin, Suite 1500 Houston"
+W22731.pdf,22221,INNOKO 5301 43-12T SWSE,Oasis Petroleum North America LLC (,"1001 Fannin, Suite 1500 Houston"
+W22740.pdf,,LARRY 5301 44-128 SESt,Oasis Petroleum North America LLC (281) 404-9,"1001 Fannin, Suite 1500 Houston"
+W23230.pdf,,LARRY 5301 44-128 SESt,Oasis Petroleum North America LLC (281) 404-9,"1001 Fannin, Suite 1500 Houston"
+W23359.pdf,,Atlanta 14-6H,"Continental Resources, Inc.",P.O. Box 268870
+W23360.pdf,,Atlanta 13-6H,"Continental Resources, Inc.",P.O. Box 268870
+W23361.pdf,23361,"Continental Resources, Inc.",,Name of Transporter
+W23362.pdf,,Atlanta 11-6H,"Continental Resources, Inc.",P.O. Box 268870
+W23363.pdf,,Atlanta Federal 10-6H,"Continental Resources, Inc.",P.O. Box 268870
+W23364.pdf,23364,Atlanta Federal 9-6H,"Continental Resources, Inc.",P.O. Box 268870
+W23365.pdf,,Atlanta Federal 8-6H,"Continental Resources, Inc.",P.O. Box 268870
+W23366.pdf,,Atlanta Federal 7-6H,"Continental Resources, Inc.",P.O. Box 268870
+W23367.pdf,23367,Atlanta Federal 6-6H,"Continental Resources, Inc.",P.O. Box 268870
+W23368.pdf,,Atlanta Federal 5-6H,"Continental Resources, Inc.",P.O. Box 268870
+W23369.pdf,,Atlanta 4-6H,"Continental Resources, Inc.",P.O. Box 268870
+W23370.pdf,,Atlanta 3-6H,"Continental Resources, Inc.",P.O. Box 268870
+W23371.pdf,,Atlanta 2-6H,"Continental Resources, Inc.",P.O. Box 268870
+W23372.pdf,,Atlanta 1-6H,"Continental Resources, Inc.",P.O. Box 268870
+W25156.pdf,25156,Columbus Federal 1-16H,"Continental Resources, Inc",P.O. Box 268870
+W25157.pdf,,Tallahassee 3-16H,Continental Resources Inc.,P.O. Box 268870
+W25158.pdf,,Tallahassee 3-16H,Continental Resources Inc.,P.O. Box 268870
+W25159.pdf,,Cclumbus Federal 2-16H,Ccntinental Resources Inc.,P.(). Box 268870
+W25160.pdf,,Columbus Federal 3-16H,Continental Resources Inc.,P.O. Box 268870
+W25571.pdf,,Columbus Federal 3-16H,Continental Resources Inc.,P.O. Box 268870
+W28190.pdf,,Operator,Oasis Petroleum North America LLC,"1001 Fannin, Suite 1500"
+W28194.pdf,,LEWIS FEDERAL 5300 21-31 5B,Oasis Petroleum North America LLC,"1001 Fannin, Suite 1500"
+W28303.pdf,,WADE FEDERAL 5300 31-30 11T LOT3,Oasis Petroleum North America LLC (2,"1001 Fannin, Suite 1500 Houston"
+W28342.pdf,,WADE FEDERAL 5300 31-30 11T LOT3,Oasis Petroleum North America LLC (2,"1001 Fannin, Suite 1500 Houston"
+W28394.pdf,28394,WADE FEDERAL 5300 41-30 4T LO1,Oasis Petroleum North America LLC,"1001 Fannin, Suite 1500 Houston"
+W28425.pdf,28394,WADE FEDERAL 5300 41-30 4T LO1,Oasis Petroleum North America LLC,"1001 Fannin, Suite 1500 Houston"
+W28554.pdf,,WADE FEDERAL 5300 31-30 2B LO,Oasis Petroleum North America LLC,Transporter
+W28557.pdf,,WADE FEDERAL 5300 41-30 7T,Oasis Petroleum North America LLC,
+W28599.pdf,28599,CHALMERS 5301 44-24 3BR SESE,Oasis Petroleum North America LLC,Transporter
+W28600.pdf,28599,CHALMERS 5301 44-24 3BR SESE,Oasis Petroleum North America LLC,Transporter
+W28601.pdf,28599,CHALMERS 5301 44-24 3BR SESE,Oasis Petroleum North America LLC,Transporter
+W28633.pdf,,,,Transporter
+W28634.pdf,,CHALMERS 5300 21-19 6B LOT?,Oasis Petroleum North America LLC,
+W28636.pdf,,,Oasis Petroleum North America LLC,Transporter
+W28637.pdf,,,Oasis Petroteum North America LLC (,"1001 Fannin, Suite 1500 Houston"
+W28648.pdf,,,Oasis Petroteum North America LLC (,"1001 Fannin, Suite 1500 Houston"
+W28649.pdf,,CHALMERS 5300 21-19 11B LOT:,Oasis Petroleum North America LLC,The above named producer authorizes the above named purchaser to |
+W28651.pdf,28651,KLINE FEDERAL 5300 41-18 9T Swsw,Oasis Petroleum North America LLC,"1001 Fannin, Suite 1500 Houston"
+W28652.pdf,28651,KLINE FEDERAL 5300 41-18 9T Swsw,Oasis Petroleum North America LLC,"1001 Fannin, Suite 1500 Houston"
+W28654.pdf,28651,KLINE FEDERAL 5300 41-18 9T Swsw,Oasis Petroleum North America LLC,"1001 Fannin, Suite 1500 Houston"
+W28655.pdf,28651,KLINE FEDERAL 5300 41-18 9T Swsw,Oasis Petroleum North America LLC,"1001 Fannin, Suite 1500 Houston"
+W28658.pdf,,KLINE FEDERAL 5300 41-18 12TX LOT4,Oasis Petroleum North America LLC,"1001 Fannin, Suite 1500 Houston"
+W28744.pdf,28744,WADE FEDERAL 5300 41-30 9B LOT:,Oasis Petroteum North America LLC,"1001 Fannin, Suite 1500 Houston"
+W28754.pdf,,KLINE FEDERAL 5300 31-18 8B LOT3,Oasis Petroleum North America LLC {,"1001 Fannin, Suite 1500 Houston"
+W28755.pdf,,KLINE FEDERAL 5300 31-18 7T LOT3,Oasis Petroleum North America LLC,"1001 Fannin, Suite 1500 Houston"
+W28756.pdf,,KLINE FEDERAL 5300 31-18 6B LOT3,Oasis Petroleum North America LLC |,"1001 Fannin, Suite 1500 Houston"
+W28976.pdf,,WADE FEDERAL 5300 21-30 12T SWNY,Oasis Petrofeum North America LLC,Transporter
+W28978.pdf,,,Oasis Petroleum North America LLC,"1001 Fannin, Suite 1500 Houston"
+W29242.pdf,,,Oasis Petroleum North America LLC,"1001 Fannin, Suite 1500 Houston"
+W29244.pdf,,KLINE FEDERAL 5300 11-18 3T LOT1,Oasis Petroleum North America LLC (2,
+W29316.pdf,,KLINE FEDERAL 5300 11-18 3T LOT1,Oasis Petroleum North America LLC (2,
+W29317.pdf,,,,P.O. Box 3886 Enid
+W29334.pdf,,KLINE FEDERAL 5300 11-18 2B LOT1,Oasis Petroleum North America LLC {,"1001 Fannin, Suite 1500 Houston"
+W30188.pdf,,LEWIS FEDERAL 5300 11-31 3B,Oasis Petroleum North America LLC,"1001 Fannin, Suite 1500"
+W30189.pdf,,Oasis Petroleum North America LLC,,"1001 Fannin, Suite 1500"
+W30789.pdf,30789,KLINE FEDERAL 5300 31-18 15T LOT3,Oasis Petroleum North America LLC |,"1001 Fannin, Suite 1500 Houston"
+W36047.pdf,30789,KLINE FEDERAL 5300 31-18 15T LOT3,Oasis Petroleum North America LLC |,"1001 Fannin, Suite 1500 Houston"
+W90244.pdf,30789,KLINE FEDERAL 5300 31-18 15T LOT3,Oasis Petroleum North America LLC |,"1001 Fannin, Suite 1500 Houston"
+W90258.pdf,30789,KLINE FEDERAL 5300 31-18 15T LOT3,Oasis Petroleum North America LLC |,"1001 Fannin, Suite 1500 Houston"
+W90329.pdf,,CARSON SWD 5301 12-24 NENV,Oasis Petroleum North America LLC,"1001 Fannin, Suite 1500 Houston"
