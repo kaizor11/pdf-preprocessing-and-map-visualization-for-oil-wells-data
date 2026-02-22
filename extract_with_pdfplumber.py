@@ -93,9 +93,13 @@ class  plumber_processor:
         data = {
             "file_no": None,
             "well_name": None,
-            "location": None,
+            "Township":None,
+            "Range":None,
+            "address":None,
             "county": None,
-            "is_ocr": False
+            "is_ocr": False,
+            "Operator ":None,
+       
         }
 
         with pdfplumber.open(pdf_path) as pdf:
@@ -119,7 +123,7 @@ class  plumber_processor:
             if well_name_match:
                 data["well_name"] = well_name_match.group(1).strip().replace('\n', ' ')
 
-            #  Extract Location (PLSS format like SWSW 34-151-100)
+            # Extract Location (PLSS format like SWSW 34-151-100)
             # Looking for common patterns in North Dakota forms
             loc_match = re.search(r'([NESW]{2}[NESW]{2})\s*(\d+)', text)
             if loc_match:
