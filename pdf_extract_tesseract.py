@@ -72,6 +72,8 @@ def main():
                     print(f"Address: {address}")
                     print(f"Extracted from {filename} page {i + 1}")
                     break
+                else:
+                    print("Did not find AUTHORIZATION TO PURCHASE page")
             
             # print(left_text)
             # print("==========")
@@ -89,8 +91,20 @@ def main():
         # if ITER == 10:
         #     break
     columns=["pdf", "file_num", "well_name", "operator", "address"]
-    output = pd.DataFrame(output, columns=columns)
-    output.to_csv("output.csv", index=False)
+    output_df = pd.DataFrame(output, columns=columns)
+
+    # fix file num
+    err_cnt = 0
+    for i, row in output_df.iterrows():
+        m = re.search(r"\d+", row["pdf"])
+        file_num_from_pdf = m.group(0) if m else None
+        if row["file_num"] != file_num_from_pdf:
+            err_cnt += 1
+            row["file_num"] = file_num_from_pdf
+    print(f"File_num mismatches: {err_cnt}")
+            
+
+    output_df.to_csv("output.csv", index=False)
     print(f"Execution time: {((time.time() - start)/60):2f} min ({time.time() - start:2f}s)")
 if __name__ == "__main__":
     main()
