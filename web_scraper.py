@@ -47,13 +47,52 @@ def scrape_drillingedge_exact(api_no):
     except Exception as e:
         print(f"Error occurred: {e}")
         return None
+import requests
+from bs4 import BeautifulSoup
+import re
 
+def scrape_drillingedge_detail(detail_url):
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+    }
 
+    print(f"Scraping detail page: {detail_url}")
+    
+    try:
+        res = requests.get(detail_url, headers=headers)
+        soup = BeautifulSoup(res.text, 'html.parser')
+        
+        # Helper function to find a label and get the adjacent value
+        def get_val(label):
+            elem = soup.find(string=re.compile(label, re.IGNORECASE))
+            if elem and elem.find_next('td'):
+                return elem.find_next('td').text.strip()
+            return "N/A"
+
+        # Extract all required fields, including the new date fields
+        data = {
+            'Status': get_val('Status'),
+            'Type': get_val('Type'),
+            'Closest_City': get_val('Closest City'),
+            'Oil_Produced': get_val('Oil Produced'),
+            'Gas_Produced': get_val('Gas Produced'),
+            'First_Production_Date': get_val('First Production Date'),
+            'Most_Recent_Production_Date': get_val('Most Recent Production Date on File')
+        }
+        
+        return data
+
+    except Exception as e:
+        print(f"Error occurred: {e}")
+        return None
+
+# Test 
 if __name__ == "__main__":
-    result = scrape_drillingedge_exact("33-053-06057")
+    url = "https://www.drillingedge.com/north-dakota/mckenzie-county/wells/kline-federal-5300-31-18-6b/33-053-06057"
+    result = scrape_drillingedge_detail(url)
     
     print("\n--- Extracted Data ---")
-    if result:  
+    if result:
         for key, value in result.items():
             print(f"{key}: {value}")
     else:
