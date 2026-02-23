@@ -1,0 +1,30 @@
+@import "node_modules/ol/ol.css";
+
+html, body {
+  margin: 0;
+  height: 100%;
+}
+#map {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
+#marker {
+  width: 20px;
+  height: 20px;
+  border: 1px solid #088;
+  border-radius: 10px;
+  background-color: #0FF;
+  opacity: 0.5;
+}
+#field_20197 {
+  text-decoration: none;
+  color: black;
+  font-size: 11pt;
+  font-weight: bold;
+  text-shadow: white 0.1em 0.1em 0.2em;
+}
+.popover-body {
+  min-width: 276px;
+}
