@@ -14,6 +14,7 @@ import {Style, Icon} from 'ol/style';
 import Feature from 'ol/Feature.js';
 import VectorLayer from 'ol/layer/Vector.js';
 import VectorSource from 'ol/source/Vector.js';
+//import mysqlPromise from "mysql2/promise.js"
 
 const iconStyle = new Style({
   image: new Icon({
@@ -24,15 +25,20 @@ const iconStyle = new Style({
   }),
 });
 
-
+// plot an example point
 const iconFeature = new Feature({
   geometry: new Point(fromLonLat([-102.397386,48.057353])),
   name: 'CHALMERS 5300 31-19H',
   operator: 'OASIS PETROLEUM NORTH AMERICA LLC',
   api: '33-053-03472',
+  status: 'Abandoned',
+  closest_city: "Williston",
+  first_prod_date: "November 1986",
+  last_prod_date: "December 2025",
 });
 iconFeature.setStyle(iconStyle);
 
+// send features to vectorlayer
 const vectorSource = new VectorSource({
   features: [iconFeature],
 });
@@ -83,12 +89,18 @@ map.on('singleclick', function (evt) {
     return;
   }
   popup.setPosition(evt.coordinate);
+
+  // get the info from oil-well feature for popup
   popover = new bootstrap.Popover(element, {
     placement: 'top',
     html: true,
     content: '<p>Name: <code>' + feature.get('name') + '</code></p>' + 
     '<p>Operator: <code>' + feature.get('operator') + '</code></p>' + 
-    '<p>API: <code>' + feature.get('api') + '</code></p>',
+    '<p>API: <code>' + feature.get('api') + '</code></p>' +
+    '<p>Status: <code>' + feature.get('status') + '</code></p>' + 
+    '<p>Closest City: <code>' + feature.get('closest_city') + '</code></p>' +
+    '<p>First Production Date: <code>' + feature.get('first_prod_date') + '</code></p>' +
+    '<p>Last Production Date: <code>' + feature.get('last_prod_date') + '</code></p>' 
   });
   popover.show();
 });
