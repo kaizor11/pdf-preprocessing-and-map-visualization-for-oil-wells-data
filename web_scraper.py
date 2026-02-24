@@ -1,99 +1,166 @@
+import pandas as pd
 import requests
 from bs4 import BeautifulSoup
 import re
-from urllib.parse import urljoin  
-def scrape_drillingedge_exact(api_no):
-    search_url = f"https://www.drillingedge.com/search?type=wells&operator_name=&well_name=&api_no={api_no}&lease_key=&state=&county=&section=&township=&range=&min_boe=&max_boe=&min_depth=&max_depth=&field_formation="
-    
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
-    }
+from urllib.parse import urljoin
+from urllib.parse import urljoin, quote
+import time
 
-    print(f"Searching for API: {api_no}...")
+# Constant header used across all network requests to simulate a real browser
+HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'}
+
+def read_inputs_from_csv(filepath):
+    df = pd.read_csv(filepath)
+    records = []
+    
+    for index, row in df.iterrows():
+        # Skip rows where file_num is empty (NaN)
+        if pd.isna(row['file_num']):
+            continue
+            
+        # Convert float (11745.0) to integer (11745) then to string
+        api_no = str((row['api']))
+        well_name = str(row['well_name'])
+        operator  = str(row['operator'])
+        records.append({
+            'api_no': api_no,
+            'well_name': well_name,
+            'operator' : operator,
+        })
+        
+    return records
+
+def get_detail_url(api_no="", operator_name="", well_name=""):
+    """
+    Accesses the search page using multiple keywords injected directly into the URL string.
+    """
+    # quote() ensures that spaces and special characters are safely URL-encoded
+    safe_api = quote(str(api_no))
+    safe_operator = quote(str(operator_name))
+    safe_well = quote(str(well_name))
+    
+    # Your preferred f-string format with placeholders for the keywords
+    search_url = f"https://www.drillingedge.com/search?type=wells&operator_name={safe_operator}&well_name={safe_well}&api_no={safe_api}&lease_key=&state=&county=&section=&township=&range=&min_boe=&max_boe=&min_depth=&max_depth=&field_formation="
     
     try:
-        res = requests.get(search_url, headers=headers)
+        res = requests.get(search_url, headers=HEADERS)
         soup = BeautifulSoup(res.text, 'html.parser')
         
+        # Look for the first link containing '/wells/'
         link_tag = soup.find('a', href=re.compile(r'/wells/'))
         if not link_tag:
-            print("No well found in search results.")
             return None
             
-       
-        detail_url = urljoin("https://www.drillingedge.com", link_tag['href'])
-        print(f"Found detail page: {detail_url}")
+        return urljoin("https://www.drillingedge.com", link_tag['href'])
         
-        detail_res = requests.get(detail_url, headers=headers)
-        detail_soup = BeautifulSoup(detail_res.text, 'html.parser')
-        
-        def get_val(label):
-            elem = detail_soup.find(string=re.compile(label, re.IGNORECASE))
-            if elem and elem.find_next('td'):
-                return elem.find_next('td').text.strip()
-            return "N/A"
-
-        data = {
-            'API_Number': api_no,
-            'Status': get_val('Status'),
-            'Type': get_val('Type'),
-            'Closest_City': get_val('Closest City'),
-            'Oil_Produced': get_val('Oil Produced'),
-            'Gas_Produced': get_val('Gas Produced')
-        }
-        
-        return data
-
     except Exception as e:
-        print(f"Error occurred: {e}")
+        print(f"  Error finding detail URL: {e}")
         return None
-import requests
-from bs4 import BeautifulSoup
-import re
 
-def scrape_drillingedge_detail(detail_url):
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
-    }
-
-    print(f"Scraping detail page: {detail_url}")
-    
+def scrape_detail_page(detail_url, api_no, well_name):
     try:
-        res = requests.get(detail_url, headers=headers)
+        res = requests.get(detail_url, headers=HEADERS)
         soup = BeautifulSoup(res.text, 'html.parser')
         
-        # Helper function to find a label and get the adjacent value
-        def get_val(label):
-            elem = soup.find(string=re.compile(label, re.IGNORECASE))
+        def get_val(label_pattern):
+           
+            elem = soup.find(string=re.compile(label_pattern, re.IGNORECASE))
             if elem and elem.find_next('td'):
-                return elem.find_next('td').text.strip()
+                val = elem.find_next('td').text.strip()
+                return val if val else "N/A"
             return "N/A"
 
-        # Extract all required fields, including the new date fields
-        data = {
-            'Status': get_val('Status'),
-            'Type': get_val('Type'),
-            'Closest_City': get_val('Closest City'),
-            'Oil_Produced': get_val('Oil Produced'),
-            'Gas_Produced': get_val('Gas Produced'),
-            'First_Production_Date': get_val('First Production Date'),
-            'Most_Recent_Production_Date': get_val('Most Recent Production Date on File')
+       
+     
+
+       
+        return {
+            'API_Number': api_no,
+            'Well_Name': well_name,
+            'Status': get_val(r'Status'),
+            'Type': get_val(r'Type'),
+            'Closest_City': get_val(r'Closest City'),
+            'First_Production_Date': get_val(r'First Production Date on File'),
+            'Most_Recent_Production_Date': get_val(r'Most Recent Production Date on File'),
+            'Latitude_Longitude': get_val(r'Latitude\s*/\s*Longitude'),
+         
         }
         
-        return data
-
     except Exception as e:
-        print(f"Error occurred: {e}")
+        print(f"  Error scraping detail page: {e}")
         return None
+def get_drillingedge_well_links(page_url):
+   
+  
+    try:
+        res = requests.get(page_url, headers=HEADERS)
+        soup = BeautifulSoup(res.text, 'html.parser')
+        
+        # Regex pattern
+        # drillingedge\.com : Matches the domain name literally 
+        # .*?               : Matches the state and county parts non-greedily
+        # /wells/           : Matches the specific wells subfolder
+        pattern = re.compile(r'drillingedge\.com/.*?/wells/', re.IGNORECASE)
+        
+        # Find all <a> tags with an href matching the pattern
+        link_tags = soup.find_all('a', href=pattern)
+        
+        # Extract the 'href' attribute and remove duplicates
+        unique_links = []
+        for tag in link_tags:
+            href = tag['href']
+            if href not in unique_links:
+                unique_links.append(href)
+                
+        return unique_links
+        
+    except Exception as e:
+        print(f"Failed to get links from {page_url}: {e}")
+        return []
 
-# Test 
-if __name__ == "__main__":
-    url = "https://www.drillingedge.com/north-dakota/mckenzie-county/wells/kline-federal-5300-31-18-6b/33-053-06057"
-    result = scrape_drillingedge_detail(url)
+def main():
+    """
+    Main controller function that combines the workflow.
+    """
+    input_csv = "output.csv"
+    output_csv = "scraped_data.csv"
     
-    print("\n--- Extracted Data ---")
-    if result:
-        for key, value in result.items():
-            print(f"{key}: {value}")
+    print("Reading targets from CSV...")
+    targets = read_inputs_from_csv(input_csv)
+    print(f"Found {len(targets)} valid targets to scrape.\n")
+    
+    all_results = []
+    
+    for target in targets:
+        api_no = target['api_no']
+        well_name = target['well_name']
+        
+        print(f"Processing API: {api_no} ({well_name})")
+        
+        # Get the detail URL
+        detail_url = get_detail_url(api_no)
+        if not detail_url:
+            print(f"  -> Search failed. No link found.")
+            continue
+            
+        print(f"  -> Found link: {detail_url}")
+        
+        
+        time.sleep(1)
+        
+        # Scrape the detail page
+        data = scrape_detail_page(detail_url, api_no, well_name)
+        if data:
+            all_results.append(data)
+            print("  -> Data extracted successfully.")
+            
+    # Export results
+    if all_results:
+        df_out = pd.DataFrame(all_results)
+        df_out.to_csv(output_csv, index=False, encoding='utf-8-sig')
+        print(f"\nWorkflow complete. Saved {len(all_results)} rows to {output_csv}")
     else:
-        print("Scraping failed or no data returned.")
+        print("\nWorkflow complete. No data was extracted.")
+
+if __name__ == "__main__":
+    main()
