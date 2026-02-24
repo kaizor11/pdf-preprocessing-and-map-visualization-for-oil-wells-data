@@ -42,7 +42,7 @@ field1.setStyle(iconStyle);
 const field2 = new Feature({
   geometry: new Point(fromLonLat([-103.602938, 48.074633])),
   name: 'Unknown',
-  operator: 'OASIS PETROLEUM NORTH AMERICA LLC',
+  operator: 'Unknown',
   api: '33-053-90244',
   status: 'Active',
   type: 'Salt Water Disposal',
@@ -52,9 +52,22 @@ const field2 = new Feature({
 });
 field2.setStyle(iconStyle);
 
+const field3 = new Feature({
+  geometry: new Point(fromLonLat([-103.602783, 48.026154])),
+  name: 'GRAMMA FEDERAL 5300 41-31 128 LOT4',
+  operator: 'Unknown',
+  api: '33-053-06231',
+  status: 'Active',
+  type: 'Oil & Gas',
+  closest_city: "Williston",
+  first_prod_date: "June 2015",
+  last_prod_date: "December 2025",
+});
+field3.setStyle(iconStyle);
+
 // send features to vectorlayer
 const vectorSource = new VectorSource({
-  features: [field1, field2],
+  features: [field1, field2, field3],
 });
 const vectorLayer = new VectorLayer({
   source: vectorSource,
