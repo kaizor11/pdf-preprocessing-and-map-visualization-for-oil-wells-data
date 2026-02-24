@@ -26,21 +26,35 @@ const iconStyle = new Style({
 });
 
 // plot an example point
-const iconFeature = new Feature({
+const field1 = new Feature({
   geometry: new Point(fromLonLat([-102.397386,48.057353])),
   name: 'CHALMERS 5300 31-19H',
   operator: 'OASIS PETROLEUM NORTH AMERICA LLC',
   api: '33-053-03472',
   status: 'Abandoned',
+  type: 'Oil & Gas',
   closest_city: "Williston",
   first_prod_date: "November 1986",
   last_prod_date: "December 2025",
 });
-iconFeature.setStyle(iconStyle);
+field1.setStyle(iconStyle);
+
+const field2 = new Feature({
+  geometry: new Point(fromLonLat([-103.602938, 48.074633])),
+  name: 'Unknown',
+  operator: 'OASIS PETROLEUM NORTH AMERICA LLC',
+  api: '33-053-90244',
+  status: 'Active',
+  type: 'Salt Water Disposal',
+  closest_city: "Williston",
+  first_prod_date: "Unknown",
+  last_prod_date: "Unknown",
+});
+field2.setStyle(iconStyle);
 
 // send features to vectorlayer
 const vectorSource = new VectorSource({
-  features: [iconFeature],
+  features: [field1, field2],
 });
 const vectorLayer = new VectorLayer({
   source: vectorSource,
@@ -98,6 +112,7 @@ map.on('singleclick', function (evt) {
     '<p>Operator: <code>' + feature.get('operator') + '</code></p>' + 
     '<p>API: <code>' + feature.get('api') + '</code></p>' +
     '<p>Status: <code>' + feature.get('status') + '</code></p>' + 
+    '<p>Type: <code>' + feature.get('type') + '</code></p>' +
     '<p>Closest City: <code>' + feature.get('closest_city') + '</code></p>' +
     '<p>First Production Date: <code>' + feature.get('first_prod_date') + '</code></p>' +
     '<p>Last Production Date: <code>' + feature.get('last_prod_date') + '</code></p>' 
