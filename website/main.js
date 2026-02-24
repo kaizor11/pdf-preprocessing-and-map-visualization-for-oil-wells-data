@@ -24,17 +24,12 @@ const iconStyle = new Style({
   }),
 });
 
-// sample oil field marker
-// const field_20197 = new Overlay({
-//   position: fromLonLat([-103.,48.]),
-//   element: document.getElementById('field_20197'),
-// });
-
-// map.addOverlay(field_20197);
 
 const iconFeature = new Feature({
-  geometry: new Point(fromLonLat([-103.,48.])),
-  name: 'field_20197'
+  geometry: new Point(fromLonLat([-102.397386,48.057353])),
+  name: 'CHALMERS 5300 31-19H',
+  operator: 'OASIS PETROLEUM NORTH AMERICA LLC',
+  api: '33-053-03472',
 });
 iconFeature.setStyle(iconStyle);
 
@@ -60,8 +55,8 @@ const map = new Map({
 
 map.addLayer(vectorLayer);
 
-const element = popup.getElementById('popup');
 
+const element = document.getElementById('popup');
 // popup for click position
 const popup = new Overlay({
   element: element,
@@ -78,7 +73,7 @@ function disposePopover() {
   }
 }
 
-// display popup on click
+// popup on click
 map.on('singleclick', function (evt) {
   const feature = map.forEachFeatureAtPixel(evt.pixel, function (feature) {
     return feature;
@@ -91,7 +86,9 @@ map.on('singleclick', function (evt) {
   popover = new bootstrap.Popover(element, {
     placement: 'top',
     html: true,
-    content: feature.get('name'),
+    content: '<p>Name: <code>' + feature.get('name') + '</code></p>' + 
+    '<p>Operator: <code>' + feature.get('operator') + '</code></p>' + 
+    '<p>API: <code>' + feature.get('api') + '</code></p>',
   });
   popover.show();
 });
