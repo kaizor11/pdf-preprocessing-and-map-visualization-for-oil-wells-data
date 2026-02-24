@@ -31,15 +31,13 @@ def read_inputs_from_csv(filepath):
     return records
 
 def get_detail_url(api_no="", operator_name="", well_name=""):
-    """
-    Accesses the search page using multiple keywords injected directly into the URL string.
-    """
+   
     # quote() ensures that spaces and special characters are safely URL-encoded
     safe_api = quote(str(api_no))
     safe_operator = quote(str(operator_name))
     safe_well = quote(str(well_name))
     
-    # Your preferred f-string format with placeholders for the keywords
+    # f-string format with placeholders for the keywords
     search_url = f"https://www.drillingedge.com/search?type=wells&operator_name={safe_operator}&well_name={safe_well}&api_no={safe_api}&lease_key=&state=&county=&section=&township=&range=&min_boe=&max_boe=&min_depth=&max_depth=&field_formation="
     
     try:
