@@ -11,4 +11,3 @@ This program extracts oil wells information from a list of 77 PDFs (each contain
 **Execution** <br>
 - Run PDF extraction `python pdf_extraction.py` --> `output.csv` (this process took around 33 minutes)
 - Store data in MySQL `python store_sql.py`
-- 
